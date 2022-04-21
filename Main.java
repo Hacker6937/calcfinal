@@ -1,10 +1,7 @@
 import java.awt.*;  
 import java.awt.event.*;  
-/*********************************************/  
-  
 public class Main extends Frame  
 {  
-  
 public boolean setClear=true;  
 double number, memValue;  
 char op;  
@@ -25,8 +22,8 @@ Label memLabel=new Label(" ",Label.RIGHT);
 final int FRAME_WIDTH=325,FRAME_HEIGHT=325;  
 final int HEIGHT=30, WIDTH=30, H_SPACE=10,V_SPACE=10;  
 final int TOPX=30, TOPY=50;  
-///////////////////////////  
-Main(String frameText)//constructor  
+
+Main(String frameText) 
 {  
 super(frameText);  
   
@@ -38,8 +35,6 @@ add(displayLabel);
   
 memLabel.setBounds(TOPX,  TOPY+HEIGHT+ V_SPACE,WIDTH, HEIGHT);  
 add(memLabel);  
-  
-// set Co-ordinates for Memory Buttons  
 tempX=TOPX;   
 y=TOPY+2*(HEIGHT+V_SPACE);  
 for(int i=0; i<memoryButton.length; i++)  
@@ -48,8 +43,6 @@ memoryButton[i]=new MyMemoryButton(tempX,y,WIDTH,HEIGHT,memoryButtonText[i], thi
 memoryButton[i].setForeground(Color.RED);  
 y+=HEIGHT+V_SPACE;  
 }  
-  
-//set Co-ordinates for Special Buttons  
 tempX=TOPX+1*(WIDTH+H_SPACE); y=TOPY+1*(HEIGHT+V_SPACE);  
 for(int i=0;i<specialButton.length;i++)  
 {  
@@ -58,7 +51,6 @@ specialButton[i].setForeground(Color.RED);
 tempX=tempX+2*WIDTH+H_SPACE;  
 }  
   
-//set Co-ordinates for Digit Buttons  
 int digitX=TOPX+WIDTH+H_SPACE;  
 int digitY=TOPY+2*(HEIGHT+V_SPACE);  
 tempX=digitX;  y=digitY;  
@@ -70,7 +62,6 @@ tempX+=WIDTH+H_SPACE;
 if((i+1)%3==0){tempX=digitX; y+=HEIGHT+V_SPACE;}  
 }  
   
-//set Co-ordinates for Operator Buttons  
 int opsX=digitX+2*(WIDTH+H_SPACE)+H_SPACE;  
 int opsY=digitY;  
 tempX=opsX;  y=opsY;  
@@ -92,7 +83,7 @@ setLayout(null);
 setSize(FRAME_WIDTH,FRAME_HEIGHT);  
 setVisible(true);  
 }  
-//////////////////////////////////  
+
 static String getFormattedText(double temp)  
 {  
 String resText=""+temp;  
@@ -100,20 +91,20 @@ if(resText.lastIndexOf(".0")>0)
     resText=resText.substring(0,resText.length()-2);  
 return resText;  
 }  
-////////////////////////////////////////  
+
 public static void main(String []args)  
 {  
 new Main("Java Calculator by Arman");  
 }  
 }  
   
-/*******************************************/  
+
   
 class MyDigitButton extends Button implements ActionListener  
 {  
 Main cl;  
   
-//////////////////////////////////////////  
+  
 MyDigitButton(int x,int y, int width,int height,String cap, Main clc)  
 {  
 super(cap);  
@@ -122,13 +113,13 @@ this.cl=clc;
 this.cl.add(this);  
 addActionListener(this);  
 }  
-////////////////////////////////////////////////  
+
 static boolean isInString(String s, char ch)  
 {  
 for(int i=0; i<s.length();i++) if(s.charAt(i)==ch) return true;  
 return false;  
 }  
-/////////////////////////////////////////////////  
+
 public void actionPerformed(ActionEvent ev)  
 {  
 String tempText=((MyDigitButton)ev.getSource()).getLabel();  
@@ -153,10 +144,8 @@ if(cl.setClear)
             {cl.displayLabel.setText(""+index);cl.setClear=false;}  
 else  
     cl.displayLabel.setText(cl.displayLabel.getText()+index);  
-}//actionPerformed  
-}//class defination  
-  
-/********************************************/  
+} 
+}
   
 class MyOperatorButton extends Button implements ActionListener  
 {  
@@ -170,7 +159,7 @@ this.cl=clc;
 this.cl.add(this);  
 addActionListener(this);  
 }  
-///////////////////////  
+ 
 public void actionPerformed(ActionEvent ev)  
 {  
 String opText=((MyOperatorButton)ev.getSource()).getLabel();  
@@ -202,7 +191,7 @@ if(!opText.equals("="))
     cl.op=opText.charAt(0);  
     return;  
     }  
-// process = button pressed  
+ 
 switch(cl.op)  
 {  
 case '+':  
@@ -221,20 +210,19 @@ case '/':
         catch(ArithmeticException excp)  
                 {cl.displayLabel.setText("Divide by 0."); return;}  
     break;  
-}//switch  
+}
   
 cl.displayLabel.setText(Main.getFormattedText(temp));  
-//cl.number=temp;  
-}//actionPerformed  
-}//class  
+ 
+}  
+}
   
-/****************************************/  
-  
+
 class MyMemoryButton extends Button implements ActionListener  
 {  
 Main cl;  
   
-/////////////////////////////////  
+ 
 MyMemoryButton(int x,int y, int width,int height,String cap, Main clc)  
 {  
 super(cap);  
@@ -243,7 +231,7 @@ this.cl=clc;
 this.cl.add(this);  
 addActionListener(this);  
 }  
-////////////////////////////////////////////////  
+
 public void actionPerformed(ActionEvent ev)  
 {  
 char memop=((MyMemoryButton)ev.getSource()).getLabel().charAt(1);  
@@ -266,11 +254,10 @@ case '+':
     else   
         cl.memLabel.setText("M");     
     break;  
-}//switch  
-}//actionPerformed  
-}//class  
-  
-/*****************************************/  
+}
+}
+}
+
   
 class MySpecialButton extends Button implements ActionListener  
 {  
@@ -284,7 +271,7 @@ this.cl=clc;
 this.cl.add(this);  
 addActionListener(this);  
 }  
-//////////////////////  
+
 static String backSpace(String s)  
 {  
 String Res="";  
@@ -292,11 +279,11 @@ for(int i=0; i<s.length()-1; i++) Res+=s.charAt(i);
 return Res;  
 }  
   
-//////////////////////////////////////////////////////////  
+
 public void actionPerformed(ActionEvent ev)  
 {  
 String opText=((MySpecialButton)ev.getSource()).getLabel();  
-//check for backspace button  
+
 if(opText.equals("Backspc"))  
 {  
 String tempText=backSpace(cl.displayLabel.getText());  
@@ -306,14 +293,14 @@ else
     cl.displayLabel.setText(tempText);  
 return;  
 }  
-//check for "C" button i.e. Reset  
+
 if(opText.equals("C"))   
 {  
 cl.number=0.0; cl.op=' '; cl.memValue=0.0;  
 cl.memLabel.setText(" ");  
 }  
   
-//it must be CE button pressed  
+
 cl.displayLabel.setText("0");cl.setClear=true;  
-}//actionPerformed  
-}//class  
+}
+}  
