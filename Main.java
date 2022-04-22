@@ -19,9 +19,9 @@ MySpecialButton specialButton[]=new MySpecialButton[specialButtonText.length];
 Label displayLabel=new Label("0",Label.RIGHT);  
 Label memLabel=new Label(" ",Label.RIGHT);  
   
-final int FRAME_WIDTH=325,FRAME_HEIGHT=325;  
-final int HEIGHT=30, WIDTH=30, H_SPACE=10,V_SPACE=10;  
-final int TOPX=30, TOPY=50;  
+final int FRAME_WIDTH=550,FRAME_HEIGHT=600;  
+final int HEIGHT=60, WIDTH=60, H_SPACE=10,V_SPACE=10;  
+final int TOPX=60, TOPY=60;  
 
 Main(String frameText) 
 {  
